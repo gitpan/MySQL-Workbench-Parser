@@ -1,0 +1,14 @@
+Changes
+LICENSE
+MANIFEST
+META.yml
+Makefile.PL
+README
+dist.ini
+lib/MySQL/Workbench/Parser.pm
+lib/MySQL/Workbench/Parser/Column.pm
+lib/MySQL/Workbench/Parser/Table.pm
+t/01_base.t
+t/release-pod-coverage.t
+t/release-pod-syntax.t
+t/test.mwb
