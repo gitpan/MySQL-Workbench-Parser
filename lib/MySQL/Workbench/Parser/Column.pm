@@ -95,7 +95,7 @@ MySQL::Workbench::Parser::Column - A column of the ER model
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 AUTHOR
 

@@ -28,10 +28,10 @@ my %WriteMakefileArgs = (
     "Moo" => "1.003001",
     "Scalar::Util" => "1.32",
     "XML::LibXML" => "2.0019",
-    "YAML::Tiny" => "1.56"
+    "YAML::Tiny" => "1.61"
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "0.01",
+  "VERSION" => "0.02",
   "test" => {
     "TESTS" => "t/*.t"
   }
