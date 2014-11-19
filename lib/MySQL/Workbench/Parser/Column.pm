@@ -44,6 +44,7 @@ has not_null      => ( is => 'rwp' );
 has autoincrement => ( is => 'rwp' );
 has default_value => ( is => 'rwp' );
 
+
 sub as_hash {
     my $self = shift;
 
@@ -89,13 +90,33 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 MySQL::Workbench::Parser::Column - A column of the ER model
 
 =head1 VERSION
 
-version 0.02
+version 0.03
+
+=head2 as_hash
+
+return info about a column as a hash
+
+    my %info = $column->as_hash;
+
+returns
+
+    (
+        name          => 'id',
+        datatype      => 'INT',
+        length        => '',
+        precision     => '0',
+        not_null      => '1',
+        autoincrement => '1',
+        default_value => '',
+    )
 
 =head1 AUTHOR
 

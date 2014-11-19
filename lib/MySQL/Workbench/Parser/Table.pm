@@ -67,6 +67,7 @@ around new => sub {
     return $obj;
 };
 
+
 sub as_hash {
     my $self = shift;
 
@@ -142,6 +143,7 @@ sub _parse {
     $self->_set_foreign_keys( \%foreign_keys );
 }
 
+
 sub get_datatype {
     my $self = shift;
 
@@ -172,13 +174,55 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 MySQL::Workbench::Parser::Table - A table of the ER model
 
 =head1 VERSION
 
-version 0.02
+version 0.03
+
+=head2 as_hash
+
+return info about a table as a hash
+
+    my %info = $table->as_hash;
+
+returns
+
+    (
+        name         => 'table_name',
+        primary_key  => [ 'id' ],
+        foreign_keys => {
+            second_table => [
+                {
+                    foreign => 'id',
+                    me      => 'second_id',
+                },
+            ],
+        },
+        columns      => [
+            name          => 'id',
+            datatype      => 'INT',
+            length        => '',
+            precision     => '0',
+            not_null      => '1',
+            autoincrement => '1',
+            default_value => '',
+        ],
+    )
+
+=head2 get_datatype
+
+get datatype for a workbench column datatype
+
+    my $datatype = $table->get_datatype( 'com.mysql.rdbms.mysql.datatype.mediumtext' );
+
+returns the MySQL name of the datatype
+
+    MEDIUMTEXT
 
 =head1 AUTHOR
 

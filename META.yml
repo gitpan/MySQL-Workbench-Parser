@@ -4,9 +4,9 @@ author:
   - 'Renee Baecker <reneeb@cpan.org>'
 build_requires: {}
 configure_requires:
-  ExtUtils::MakeMaker: '6.30'
+  ExtUtils::MakeMaker: '0'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300039, CPAN::Meta::Converter version 2.132830'
+generated_by: 'Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.142060'
 license: artistic_2
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -20,10 +20,11 @@ requires:
   List::MoreUtils: '0.33'
   Moo: '1.003001'
   Scalar::Util: '1.32'
+  Test::LongString: '0.16'
   XML::LibXML: '2.0019'
-  YAML::Tiny: '1.61'
+  YAML::Tiny: '1.64'
 resources:
   bugtracker: http://github.com/reneeb/MySQL-Workbench-Parser/issues
   homepage: http://github.com/reneeb/MySQL-Workbench-Parser
   repository: git://github.com/reneeb/MySQL-Workbench-Parser.git
-version: '0.02'
+version: '0.03'

@@ -15,7 +15,7 @@ use YAML::Tiny;
 
 use MySQL::Workbench::Parser::Table;
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 has file   => (
     is       => 'ro',
@@ -79,8 +79,11 @@ sub _parse {
     my %datatypes;
     my @simple_type_nodes = $dom->documentElement->findnodes( './/value[@key="simpleDatatypes"]/link' );
     for my $type_node ( @simple_type_nodes ) {
-         my $link          = $type_node->textContent;
-         $datatypes{$link} = { name => uc +(split /\./, $link)[-1], length => undef };
+         my $link     = $type_node->textContent;
+         my $datatype = uc +(split /\./, $link)[-1];
+         $datatype    =~ s/_F\z//;
+
+         $datatypes{$link} = { name => $datatype, length => undef };
     }
 
     my @user_type_structs = $dom->documentElement->findnodes( './/value[@key="userDatatypes"]' );
@@ -118,13 +121,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 MySQL::Workbench::Parser - parse .mwb files created with MySQL Workbench
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -155,6 +160,16 @@ returns an array of L<MySQL::Workbench::Parser::Table> objects
 dump the database structure as YAML
 
     my $yaml = $parser->dump;
+
+=head2 get_datatype
+
+get datatype for a workbench column datatype
+
+    my $datatype = $table->get_datatype( 'com.mysql.rdbms.mysql.datatype.mediumtext' );
+
+returns the MySQL name of the datatype
+
+    MEDIUMTEXT
 
 =head1 AUTHOR
 
