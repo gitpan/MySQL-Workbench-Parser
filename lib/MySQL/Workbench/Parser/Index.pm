@@ -98,7 +98,7 @@ MySQL::Workbench::Parser::Index - An index of the ER model
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head2 as_hash
 

@@ -31,7 +31,7 @@ my %WriteMakefileArgs = (
     "XML::LibXML" => "2.0019",
     "YAML::Tiny" => "1.64"
   },
-  "VERSION" => "0.04",
+  "VERSION" => "0.05",
   "test" => {
     "TESTS" => "t/*.t"
   }

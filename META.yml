@@ -27,4 +27,4 @@ resources:
   bugtracker: http://github.com/reneeb/MySQL-Workbench-Parser/issues
   homepage: http://github.com/reneeb/MySQL-Workbench-Parser
   repository: git://github.com/reneeb/MySQL-Workbench-Parser.git
-version: '0.04'
+version: '0.05'

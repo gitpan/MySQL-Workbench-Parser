@@ -156,7 +156,18 @@ sub _parse {
         my $me_column_id = $foreign_key_node->findvalue( './/value[@key="columns"]/link' );
         my $me_column    = $node->findvalue( './/value[@id="' . $me_column_id . '"]/value[@key="name"]' );
 
-        push @{ $foreign_keys{$table} }, { me => $me_column, foreign => $column };
+        my %actions;
+        my $delete_action = $foreign_key_node->findvalue( './/value[@key="deleteRule"]' );
+        if ( $delete_action ) {
+            $actions{on_delete} = lc $delete_action;
+        }
+
+        my $update_action = $foreign_key_node->findvalue( './/value[@key="updateRule"]' );
+        if ( $update_action ) {
+            $actions{on_update} = lc $update_action;
+        }
+
+        push @{ $foreign_keys{$table} }, { %actions, me => $me_column, foreign => $column };
     }
 
     my @indexes;
@@ -224,7 +235,7 @@ MySQL::Workbench::Parser::Table - A table of the ER model
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head2 as_hash
 

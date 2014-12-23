@@ -13,6 +13,8 @@ lib/MySQL/Workbench/Parser/Table.pm
 t/01_base.t
 t/02_datetime.t
 t/03_index.t
+t/04_actions.t
+t/actions.mwb
 t/date.mwb
 t/date.mwb.bak
 t/index.mwb
