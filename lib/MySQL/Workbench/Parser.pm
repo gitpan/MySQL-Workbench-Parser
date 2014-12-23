@@ -15,7 +15,7 @@ use YAML::Tiny;
 
 use MySQL::Workbench::Parser::Table;
 
-our $VERSION = 0.03;
+our $VERSION = 0.04;
 
 has file   => (
     is       => 'ro',
@@ -129,7 +129,7 @@ MySQL::Workbench::Parser - parse .mwb files created with MySQL Workbench
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 

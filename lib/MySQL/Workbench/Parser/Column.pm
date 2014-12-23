@@ -8,7 +8,7 @@ use warnings;
 use Moo;
 use Scalar::Util qw(blessed);
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 has node => (
     is       => 'ro',
@@ -62,7 +62,10 @@ sub _parse {
 
     my $node = $self->node;
 
-    for my $key ( qw(name id length precision) ) {
+    my $id = $node->findvalue( '@id' );
+    $self->_set_id( $id );
+
+    for my $key ( qw(name length precision) ) {
         my $value  = $node->findvalue( './value[@key="' . $key . '"]' );
         my $method = $self->can( '_set_' . $key );
         $self->$method( $value );
@@ -98,7 +101,7 @@ MySQL::Workbench::Parser::Column - A column of the ER model
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head2 as_hash
 

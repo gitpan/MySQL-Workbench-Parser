@@ -13,7 +13,7 @@ use_ok 'MySQL::Workbench::Parser';
 
 my $mwb = File::Spec->catfile(
     dirname( __FILE__ ),
-    'test.mwb',
+    'index.mwb',
 );
 
 my $check = q|---
@@ -25,19 +25,53 @@ tables:
         datatype: INT
         default_value: ''
         length: '-1'
-        name: user_id
+        name: idusers
         not_null: '1'
+        precision: '-1'
+      -
+        autoincrement: '0'
+        datatype: VARCHAR
+        default_value: ''
+        length: '45'
+        name: user_name
+        not_null: '1'
+        precision: '-1'
+      -
+        autoincrement: '0'
+        datatype: VARCHAR
+        default_value: ''
+        length: '45'
+        name: nick
+        not_null: '1'
+        precision: '-1'
+      -
+        autoincrement: '0'
+        datatype: VARCHAR
+        default_value: ''
+        length: '45'
+        name: company
+        not_null: '0'
         precision: '-1'
     foreign_keys: {}
     indexes:
       -
         columns:
-          - user_id
+          - idusers
         name: PRIMARY
         type: PRIMARY
-    name: tm_user
+      -
+        columns:
+          - user_name
+        name: user_name_UNIQUE
+        type: UNIQUE
+      -
+        columns:
+          - nick
+        name: nick_UNIQUE
+        type: UNIQUE
+    name: users
     primary_key:
-      - user_id
+      - idusers
   -
     columns:
       -
@@ -45,7 +79,7 @@ tables:
         datatype: INT
         default_value: ''
         length: '-1'
-        name: speisen_id
+        name: group_id
         not_null: '1'
         precision: '-1'
       -
@@ -56,67 +90,21 @@ tables:
         name: name
         not_null: '1'
         precision: '-1'
-      -
-        autoincrement: '0'
-        datatype: DECIMAL
-        default_value: ''
-        length: '-1'
-        name: speisencol
-        not_null: '0'
-        precision: 10,0
-      -
-        autoincrement: '0'
-        datatype: VARCHAR
-        default_value: ''
-        length: '45'
-        name: speisencol1
-        not_null: '0'
-        precision: '-1'
-      -
-        autoincrement: '0'
-        datatype: INT
-        default_value: ''
-        length: '-1'
-        name: table1_id
-        not_null: '1'
-        precision: '-1'
-      -
-        autoincrement: '0'
-        datatype: INT
-        default_value: ''
-        length: '-1'
-        name: table1_id1
-        not_null: '1'
-        precision: '-1'
-    foreign_keys:
-      table1:
-        -
-          foreign: table1_id
-          me: table1_id
-        -
-          foreign: table1_id
-          me: table1_id1
+    foreign_keys: {}
     indexes:
       -
         columns:
-          - speisen_id
-          - name
+          - group_id
         name: PRIMARY
         type: PRIMARY
       -
         columns:
-          - table1_id
-        name: fk_speisen_table1
-        type: INDEX
-      -
-        columns:
-          - table1_id1
-        name: fk_speisen_table11
-        type: INDEX
-    name: speisen
+          - name
+        name: name_UNIQUE
+        type: UNIQUE
+    name: groups
     primary_key:
-      - speisen_id
-      - name
+      - group_id
   -
     columns:
       -
@@ -124,23 +112,50 @@ tables:
         datatype: INT
         default_value: ''
         length: '-1'
-        name: table1_id
+        name: user_id
         not_null: '1'
         precision: '-1'
-    foreign_keys: {}
+      -
+        autoincrement: '0'
+        datatype: INT
+        default_value: ''
+        length: '-1'
+        name: group_id
+        not_null: '1'
+        precision: '-1'
+    foreign_keys:
+      groups:
+        -
+          foreign: group_id
+          me: group_id
+      users:
+        -
+          foreign: idusers
+          me: user_id
     indexes:
       -
         columns:
-          - table1_id
+          - user_id
+          - group_id
         name: PRIMARY
         type: PRIMARY
-    name: table1
+      -
+        columns:
+          - group_id
+        name: fk_users_has_groups_groups1_idx
+        type: INDEX
+      -
+        columns:
+          - user_id
+        name: fk_users_has_groups_users_idx
+        type: INDEX
+    name: user_groups
     primary_key:
-      - table1_id
+      - user_id
+      - group_id
 |;
 
 my $parser = MySQL::Workbench::Parser->new( file => $mwb );
 is_string $parser->dump, $check;
-
 
 done_testing();
